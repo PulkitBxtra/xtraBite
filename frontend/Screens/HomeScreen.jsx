@@ -1,15 +1,19 @@
 import { View, Text, SafeAreaView, Image, TextInput, ScrollView } from "react-native";
-import React from "react";
+import React,{useState, useEffect} from "react";
 import { TailwindProvider } from "tailwindcss-react-native";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect } from "react";
 import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon , MagnifyingGlassIcon } from "react-native-heroicons/outline";
 import Categories from "../Components/Categories";
 import FeaturedView from "../Components/FeaturedView";
+import client from "../Sanity"
+import 'react-native-url-polyfill/auto'
 
 const HomeScreen = () => {
     //change the header hook
     const Navigation = useNavigation();
+
+    // const [featured, setfeatured] = useState("");
   
     //do something as soon as the screen appears
     useLayoutEffect(() => {
@@ -17,6 +21,22 @@ const HomeScreen = () => {
         // headerTitle: "Testing",
         headerShown: false,
       });
+    }, []);
+
+    useEffect(() => {
+      client
+        .fetch(
+          `*[_type == "featured"]{
+            ...,
+            restaurants[]->{
+              ...,  
+              dishes[]->{
+              }
+            }
+      }`
+        )
+        .then((data) => console.log(data))
+        .catch(console.error);
     }, []);
   
     return (
