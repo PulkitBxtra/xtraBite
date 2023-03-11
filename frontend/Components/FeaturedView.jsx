@@ -1,9 +1,37 @@
 import { View, Text , ScrollView } from 'react-native'
-import React from 'react'
+import React, { useEffect , useState } from 'react'
 import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon , MagnifyingGlassIcon , ArrowRightIcon } from "react-native-heroicons/outline";
 import RestrauntCard from './RestrauntCard';
+import client from '../Sanity';
+import { NativeWindStyleSheet } from "nativewind";
+
+NativeWindStyleSheet.setOutput({
+  default: "native",
+});
 
 const FeaturedView = (props) => {
+
+  const [restaurants,setRestaurants] = useState([]);
+
+  useEffect(()=>{
+    client.fetch(`
+    *[_type == "featured" && _id == $id]{
+      ...,
+      restaraunts[]->{
+        ...,  
+        dishes[]->,
+        type->{
+          name
+        }  
+        },
+      }[0]
+    `,{id:props.id})
+    .then((data)=>setRestaurants(data?.restaraunts))
+    .catch((err)=>console.log(err));
+  },[]);
+
+  // console.log(restaurants);
+
     // console.log(props);
   return (
     <View>
@@ -19,26 +47,36 @@ const FeaturedView = (props) => {
         </View>
 
         <ScrollView
+        showHorizontalScrollIndicator={false}
+        
         horizontal
         contentContainerStyle={{
             paddingHorizontal: 15,
         }}
-        showHorizontalScrollIndicator={false}
         className="pt-4"
         >
 
+
+          {restaurants.map(restaurant =>(
+
             <RestrauntCard
-                    id="1"
-                    imgUrl="http://links.papareact.com/gn7"
-                    title="Yo! Sushi"
-                    rating="6.9"
-                    address="Dwarka Mor"
-                    genre="Japanese"
-                    ShortDescription="not so short"
-                    dishes={[]}
-                    long="5"
-                    latt="8"
+                    key= {restaurant._id}
+                    id= {restaurant._id}
+                    imgUrl={restaurant.Image}
+                    title={restaurant.name}
+                    rating={restaurant.rating}
+                    address={restaurant.Address}
+                    genre={restaurant.type.name}
+                    ShortDescription={restaurant.ShortDescription}
+                    dishes={restaurant.dishes}
+                    long={restaurant.long}
+                    latt={restaurant.latt}
             />
+          ))}
+
+           
+
+            
 
         </ScrollView>
 

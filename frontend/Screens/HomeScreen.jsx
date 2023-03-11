@@ -13,7 +13,7 @@ const HomeScreen = () => {
     //change the header hook
     const Navigation = useNavigation();
 
-    // const [featured, setfeatured] = useState("");
+    const [featuredCategories, setFeaturedCategories] = useState([]);
   
     //do something as soon as the screen appears
     useLayoutEffect(() => {
@@ -35,7 +35,7 @@ const HomeScreen = () => {
             }
       }`
         )
-        .then((data) => console.log(data))
+        .then((data) => setFeaturedCategories(data))
         .catch(console.error);
     }, []);
   
@@ -91,26 +91,18 @@ const HomeScreen = () => {
       <ScrollView>
         <Categories></Categories>
 
-        <FeaturedView
-        id="1"
-        title="Featured"
-        description="paid placements by our partners"
-        />
+        {
+          featuredCategories?.map(category => (
+            <FeaturedView
+              key={category._id}
+              id={category._id}
+              title={category.name}
+              description={category.shortDescription}
+              />
+          ))
+        }
 
-        <FeaturedView
-        id="2"
-        title="Tasty Discounts"
-        description="Delicious Food Delivered to your Doorstep"
-        />
-
-        <FeaturedView
-        id="3"
-        title="Offers Near you"
-        description="Out of buck, here is the cool stuff"
-        />
-        
-        
-        
+              
 
       </ScrollView>
     </View>

@@ -19,7 +19,7 @@ export default{
         },
 
         {
-            name:"restaraunts",
+            name:"restaurants",
             type:"array",
             title:"Restaraunts",
             of:[{type:"reference", to:  [{type:"restaurants"}] }],

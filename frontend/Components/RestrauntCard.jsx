@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity , Image  } from 'react-native'
 import React from 'react'
 import { StarIcon, MapPinIcon } from "react-native-heroicons/solid";
+import { urlFor } from '../Sanity';
 
 
 const RestrauntCard = (props) => {
   // console.log(props);
   return (
-    <TouchableOpacity className="bg-white shadow mb-2">
-        <Image source={{uri: props.imgUrl,}} className="h-36 w-64 rounded-sm">
+    <TouchableOpacity className="bg-white shadow mb-2 mr-2">
+        <Image source={{uri: urlFor(props.imgUrl).url(),}} className="h-36 w-64 rounded-sm">
 
         </Image>
 
