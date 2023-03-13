@@ -5,6 +5,7 @@ import { urlFor } from '../Sanity';
 import { ArrowLeftIcon , StarIcon , MapPinIcon , ChevronRightIcon } from 'react-native-heroicons/solid';
 import {QuestionMarkCircleIcon} from 'react-native-heroicons/outline'
 import DishRow from '../Components/DishRow';
+import BasketIcon from '../Components/BasketIcon';
 
 const RestaurantScreen = () => {
     const route = useRoute();
@@ -20,6 +21,9 @@ const RestaurantScreen = () => {
     },[])
 
   return (
+    <>
+    <BasketIcon></BasketIcon>
+
     <ScrollView>
     <View className="relative">
         <Image source={{uri: urlFor(route.params.props.imgUrl).url(),}}
@@ -55,7 +59,7 @@ const RestaurantScreen = () => {
                 </Text>
             <ChevronRightIcon color="#00CCBB"></ChevronRightIcon>
         </TouchableOpacity>
-    <View>
+    <View className="pb-36">
         <Text className="px-4 pt-6 mb-3 font-bold text-xl">
             Menu
         </Text>
@@ -74,6 +78,7 @@ const RestaurantScreen = () => {
     </View>
     </View>
     </ScrollView>
+    </>
   )
 }
 
