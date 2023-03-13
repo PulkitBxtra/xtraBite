@@ -91,6 +91,7 @@ const HomeScreen = () => {
       <ScrollView>
         <Categories></Categories>
 
+        <View className="pb-44">
         {
           featuredCategories?.map(category => (
             <FeaturedView
@@ -101,6 +102,7 @@ const HomeScreen = () => {
               />
           ))
         }
+        </View>
 
               
 
