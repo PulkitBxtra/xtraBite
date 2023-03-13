@@ -47,7 +47,7 @@ const FeaturedView = (props) => {
         </View>
 
         <ScrollView
-        showHorizontalScrollIndicator={false}
+        showsHorizontalScrollIndicator={false} 
         
         horizontal
         contentContainerStyle={{
