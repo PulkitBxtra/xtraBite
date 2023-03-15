@@ -6,9 +6,9 @@ import HomeScreen from "./Screens/HomeScreen";
 import RestaurantScreen from "./Screens/RestaurantScreen";
 import BasketScreen from "./Screens/BasketScreen";
 import PrepairingOrderScreen from "./Screens/PrepairingOrderScreen";
+import DeliveryScreen from "./Screens/DeliveryScreen";
 import { Provider } from "react-redux";
 import Store from "./Store";
-import DeliveryScreen from "./Screens/DeliveryScreen";
 
 const Stack = createNativeStackNavigator();
 
