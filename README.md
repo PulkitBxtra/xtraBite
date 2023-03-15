@@ -4,6 +4,9 @@ Welcome to xtraBite, the ultimate food ordering app that connects you to the bes
 
 ## Demo
 
+![Demo](/demo.gif)
+
+
 [![My Cool Video](https://img.youtube.com/vi/DubJ7x2nHtI/0.jpg)](https://www.youtube.com/watch?v=DubJ7x2nHtI)
 
 ## Features
