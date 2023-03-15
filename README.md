@@ -2,7 +2,9 @@
 
 Welcome to xtraBite, the ultimate food ordering app that connects you to the best restaurants and cafes in town! 
 
-[![My Cool Video](https://img.youtube.com/vi/3zmjpxhriRA/0.jpg)](https://www.youtube.com/watch?v=3zmjpxhriRA)
+## Demo
+
+[![My Cool Video](https://img.youtube.com/vi/DubJ7x2nHtI/0.jpg)](https://www.youtube.com/watch?v=DubJ7x2nHtI)
 
 ## Features
 - Browse menus from your favorite restaurants
