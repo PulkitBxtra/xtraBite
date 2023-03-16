@@ -4,9 +4,13 @@ Welcome to xtraBite, the ultimate food ordering app that connects you to the bes
 
 ## Demo
 
-
-
 [![My Cool Video](https://i3.ytimg.com/vi/DubJ7x2nHtI/maxresdefault.jpg)](https://www.youtube.com/watch?v=DubJ7x2nHtI)
+
+xtraBite is powered by a CMS called [Sanity](https://www.sanity.io/), which enables us to bring you the most up-to-date menus and restaurant information. Our menus and restaurant data are stored securely and are easily accessible through our app. 
+
+To manage the content on our app, we use Sanity's intuitive content studio. You can explore our content studio by clicking the button below:
+
+[![Sanity Studio](https://i.imgur.com/In5NABX.jpg)](https://xtrabite.sanity.studio/)
 
 ## Features
 - Browse menus from your favorite restaurants

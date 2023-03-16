@@ -7,7 +7,7 @@ import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon , MagnifyingGlassIco
 import Categories from "../Components/Categories";
 import FeaturedView from "../Components/FeaturedView";
 import client from "../Sanity"
-import 'react-native-url-polyfill/auto'
+// import 'react-native-url-polyfill/auto'
 
 const HomeScreen = () => {
     //change the header hook
