@@ -1,6 +1,6 @@
-import { View, Text , ScrollView } from 'react-native'
-import React, { useEffect , useState } from 'react'
-import { ChevronDownIcon, UserIcon, AdjustmentsVerticalIcon , MagnifyingGlassIcon , ArrowRightIcon } from "react-native-heroicons/outline";
+import { View, Text, ScrollView } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { ArrowRightIcon } from "react-native-heroicons/outline";
 import RestrauntCard from './RestrauntCard';
 import client from '../Sanity';
 import { NativeWindStyleSheet } from "nativewind";
@@ -10,78 +10,68 @@ NativeWindStyleSheet.setOutput({
 });
 
 const FeaturedView = (props) => {
+  const [restaurants, setRestaurants] = useState([]);
 
-  const [restaurants,setRestaurants] = useState([]);
+  useEffect(() => {
+    client
+      .fetch(
+        `
+        *[_type == "featured" && _id == $id]{
+          ...,
+          restaurants[]->{
+            ...,  
+            dishes[]->,
+            type->{
+              name
+            }
+          },
+        }[0]
+      `,
+        { id: props.id }
+      )
+      .then((data) => setRestaurants(data?.restaurants))
+      .catch((err) => console.log(err));
+  }, [props.id]);
 
-  useEffect(()=>{
-    client.fetch(`
-    *[_type == "featured" && _id == $id]{
-      ...,
-      restaraunts[]->{
-        ...,  
-        dishes[]->,
-        type->{
-          name
-        }  
-        },
-      }[0]
-    `,{id:props.id})
-    .then((data)=>setRestaurants(data?.restaraunts))
-    .catch((err)=>console.log(err));
-  },[]);
+  console.log("These are the restaurants:", restaurants);
 
-  // console.log(restaurants);
-
-    // console.log(props);
   return (
     <View>
       <View className="flex-row mt-4 px-4 justify-between items-center">
         <Text className="text-lg font-bold">{props.title}</Text>
-        <ArrowRightIcon color="#00CCBB" size={30}></ArrowRightIcon>
+        <ArrowRightIcon color="#00CCBB" size={30} />
       </View>
 
-        <View>
-            <Text className="text-xs text-gray-500 px-4">
-                {props.description}
-            </Text>
-        </View>
+      <View>
+        <Text className="text-xs text-gray-500 px-4">{props.description}</Text>
+      </View>
 
-        <ScrollView
-        showsHorizontalScrollIndicator={false} 
-        
+      <ScrollView
+        showsHorizontalScrollIndicator={false}
         horizontal
         contentContainerStyle={{
-            paddingHorizontal: 15,
+          paddingHorizontal: 15,
         }}
         className="pt-4"
-        >
-
-
-          {restaurants.map(restaurant =>(
-
-            <RestrauntCard
-                    key= {restaurant._id}
-                    id= {restaurant._id}
-                    imgUrl={restaurant.Image}
-                    title={restaurant.name}
-                    rating={restaurant.rating}
-                    address={restaurant.Address}
-                    genre={restaurant.type.name}
-                    ShortDescription={restaurant.ShortDescription}
-                    dishes={restaurant.dishes}
-                    long={restaurant.long}
-                    latt={restaurant.latt}
-            />
-          ))}
-
-           
-
-            
-
-        </ScrollView>
-
+      >
+        {restaurants.map((restaurant) => (
+          <RestrauntCard
+            key={restaurant._id}
+            id={restaurant._id}
+            imgUrl={restaurant.Image} // Adjusted to lowercase
+            title={restaurant.name}
+            rating={restaurant.rating}
+            address={restaurant.address} // Adjusted if needed
+            genre={restaurant.type?.name}
+            ShortDescription={restaurant.shortDescription} // Adjusted capitalization if needed
+            dishes={restaurant.dishes}
+            long={restaurant.long}
+            latt={restaurant.latt}
+          />
+        ))}
+      </ScrollView>
     </View>
-  )
-}
+  );
+};
 
-export default FeaturedView
+export default FeaturedView;
